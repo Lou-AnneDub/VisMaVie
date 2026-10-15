@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="footer/footer.css">
+    <link rel="icon" href="assets/favicon.ico">
+
+    <title>???? | Association Valentin Haüy</title>
+    <meta
+      name="description"
+      content="????"
+    />
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KRHSFTT');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Matomo Tag Manager -->
+    <script>
+    var _mtm = window._mtm = window._mtm || [];
+    _mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
+    (function() {
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src='https://cdn.matomo.cloud/avh.matomo.cloud/container_evc7kVnn.js'; s.parentNode.insertBefore(g,s);
+    })();
+    </script>
+    <!-- End Matomo Tag Manager -->
+</head>
+
+<!-- Script pour le sommaire -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const hero = document.querySelector(".hero");
+    const summary = document.querySelector(".summary");
+
+    if (!hero || !summary) return;
+
+    // Réserver l'espace occupé initialement par le sommaire
+    const placeholder = document.createElement("div");
+    placeholder.className = "summary-placeholder";
+
+    summary.parentNode.insertBefore(placeholder, summary);
+
+    function updatePlaceholderSize() {
+        if (!summary.classList.contains("is-floating")) {
+            placeholder.style.width = `${summary.offsetWidth}px`;
+            placeholder.style.height = `${summary.offsetHeight}px`;
+        }
+    }
+
+    window.addEventListener("resize", updatePlaceholderSize);
+
+    // Création du bouton burger dans le sommaire existant
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "summary-toggle";
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-label", "Ouvrir le sommaire");
+
+    button.innerHTML = `
+        <span class="burger-icon" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+    `;
+
+    summary.insertBefore(button, summary.firstChild);
+
+    function closeMenu() {
+        summary.classList.remove("is-open");
+        button.setAttribute("aria-expanded", "false");
+        button.setAttribute("aria-label", "Ouvrir le sommaire");
+    }
+
+    button.addEventListener("click", () => {
+        const isOpen = summary.classList.toggle("is-open");
+
+        button.setAttribute("aria-expanded", String(isOpen));
+        button.setAttribute(
+            "aria-label",
+            isOpen ? "Fermer le sommaire" : "Ouvrir le sommaire"
+        );
+    });
+
+    // Fermeture après sélection d'une section
+    summary.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", closeMenu);
+    });
+
+    // Fermeture avec la touche Échap
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+            closeMenu();
+        }
+    });
+
+    // Fermeture au clic en dehors du sommaire
+    document.addEventListener("click", event => {
+        if (!summary.contains(event.target)) {
+            closeMenu();
+        }
+    });
+
+    function updateSummary() {
+        const heroBottom = hero.getBoundingClientRect().bottom;
+
+        const threshold = window.innerHeight * 0.15;
+
+        const shouldFloat = heroBottom < threshold;
+
+        if (shouldFloat && !summary.classList.contains("is-floating")) {
+            placeholder.style.width = `${summary.offsetWidth}px`;
+            placeholder.style.height = `${summary.offsetHeight}px`;
+        }
+
+        summary.classList.toggle("is-floating", shouldFloat);
+        placeholder.classList.toggle("is-active", shouldFloat);
+
+        if (!shouldFloat) {
+            closeMenu();
+        }
+    }
+
+    window.addEventListener("scroll", updateSummary, {
+        passive: true
+    });
+
+    window.addEventListener("resize", updateSummary);
+
+    updateSummary();
+});
+</script>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRHSFTT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <header>
+        <a href="https://www.avh.asso.fr/" target='_blank'><img class="logo" src="assets/logo_avh.png" alt="Association Valentin Haüy, avec les aveugles et les malvoyants. Agir pour l'autonomie ! Lien vers le site institutionnel" /></a>
+        <a class="CTA" href="https://donner.avh.asso.fr/ponctuel/?from=W26GDN&utm_source=lp&utm_medium=organic&utm_campaign=vmv26">Je fais un don</a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Et si, pendant quelques instants, vous deviez vivre votre quotidien dans l’obscurité la plus totale ?</h1>
+            <div class="divHero">
+                <div class="videoContainer">
+                    <iframe src="https://www.youtube.com/embed/LuMFayewsgA?si=A-cmBnFm6BxBQWmS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>  
+                </div> 
+                <div class="summary" id="summary">
+                    <h2>Sommaire :</h2>
+                    <ul>
+                        <li><a href="#contexte">Contexte</a></li>
+                        <li><a href="#refindLink">Retrouver un lien</a></li>
+                        <li><a href="#reWalk">Réapprendre à se déplacer</a></li>
+                        <li><a href="#reEverydayLife">Retrouver les gestes du quotidien</a></li>
+                        <li><a href="#reWork">Retrouver un avenir professionnel</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="contexte" id="contexte">
+            <p class="textTransition">
+                Notre nouvelle campagne « Galères de nuit » vous invite à vivre une expérience immersive et profondément humaine pour changer de regard sur la cécité et la malvoyance.
+            </p>
+            <p>Qui n’a jamais marché à tâtons dans le noir pour ne pas réveiller une maison qui dort ? 
+                <br>Et si cette réalité devenait votre quotidien, que feriez-vous ?
+            <br>
+            <br>Ici, nous vous proposons de partager l’expérience de Delphine, 45 ans, comptable, devenue très malvoyante à la suite d’un accident de voiture. Tout bascule alors dans sa vie. Elle perd son emploi. En parallèle, la perte progressive de la vue lui fait perdre tous ses repères. <span class="textGras">Elle finit par s’isoler chez elle jusqu’à ce que son médecin lui parle de l’association Valentin Haüy.</span>
+            <br>
+            <br>
+            <span class="textGras">Découvrez comment cette rencontre avec les équipes de l'association Valentin Haüy a changé sa vie !</span></p>
+        </section>
+
+        <section class="refindLink" id="refindLink">
+            <div class="textContainer">
+                <div class="titleContainer">
+                    <img src="assets/retrouverlien.png" alt="">
+                    <h2>Retrouver un lien</h2>
+                </div>
+                <p>Lorsqu’elle pousse la porte de l’association, Delphine ne sait pas vraiment ce qu’elle vient chercher. Une assistante sociale l’écoute, la conseille et l’oriente. Delphine comprend qu’<span class="textGras">elle n’est plus seule et que des solutions existent</span>, notamment pour faire valoir ses droits.</p>
+                <a href="#summary" class="skip-to-summary"> Retour au sommaire</a>
+            </div>
+            <img src="assets/illu_lien.svg" alt="" class="illu">
+        </section>
+
+        <section class="reWalk" id="reWalk">
+            <img src="assets/illu_deplacer.svg" alt="" class="illu">
+            <div class="textContainer">
+                <div class="titleContainer">
+                    <img src="assets/sedeplacer.png" alt="">
+                    <h2>Réapprendre à se déplacer</h2>
+                </div>
+                <p>Après ce rendez-vous, Delphine se rend au comité Valentin Haüy près de chez elle et commence des cours de locomotion. Elle apprend à se déplacer avec une canne blanche, à se repérer et à mobiliser autrement ses perceptions. <span class="textGras">Au début, chaque déplacement demande une immense attention. Puis viennent les premiers trajets et la confiance.</span> Et un jour, Delphine sort seule.</p>
+                <div class="donContainer">
+                    <img src="assets/illu_don.png" alt="">
+                    <div class="textDon">
+                        <p>Grâce à votre soutien et à votre générosité, permettez à des dizaines de personnes comme Delphine, touchée par un handicap visuel, de retrouver leurs repères et d’apprendre à se déplacer en toute autonomie.</p>
+                        <p class="equivalence">50 € = 1h de cours de locomotion</p>
+                        <a href="https://donner.avh.asso.fr/ponctuel/?from=W26GDN&utm_source=lp&utm_medium=organic&utm_campaign=vmv26" class="CTA_secondaire CTA_violet">Je donne</a>
+                    </div>
+                </div>
+                <a href="#summary" class="skip-to-summary"> Retour au sommaire</a>
+            </div>
+        </section>
+
+        <section class="reEverydayLife" id="reEverydayLife">
+            <div class="textContainer">
+                <div class="titleContainer">
+                    <img src="assets/gestesquotidien.png" alt="">
+                    <h2>Retrouver les gestes du quotidien</h2>
+                </div>
+                <p>
+                    Au comité Valentin Haüy, le quotidien de Delphine s’ouvre peu à peu à de nouvelles possibilités. Elle retrouve le plaisir de cuisiner, de lire, de sortir, de partager une balade ou une visite culturelle avec d’autres. Son monde, qui s’était rétréci, s’élargit de nouveau. Mais dans ce quotidien qu’elle reconquiert peu à peu, <span class="textGras">le numérique reste encore un obstacle.</span> 
+                    <br>
+                    <br>
+                    Grâce à des cours d’informatique adaptée, elle apprend à utiliser autrement son ordinateur et son téléphone. Peu à peu, elle retrouve ses repères jusqu’à pouvoir acheter seule son billet de train. <span class="textGras">Bien plus qu’un billet, c’est la liberté de partir qu’elle retrouve.</span>
+                </p>
+                <div class="petitionContainer">
+                    <p class="titlePetition">En France, seulement 3 % des sites internet sont accessibles à tous.</p>
+                    <p>Agissons ensemble pour faire avancer les choses et offrir aux personnes déficientes visuelles le droit à l’information.</p>
+                    <a href="https://sensibiliser.avh.asso.fr/moyen-age-captcha/?utm_source=lp&utm_medium=organic&utm_campaign=vmv26" class="CTA_secondaire CTA_orange">Je signe la pétition</a>
+                </div>
+                <a href="#summary" class="skip-to-summary"> Retour au sommaire</a>
+            </div>
+            <img src="assets/illu_quotidien.svg" alt="" class="illu">
+        </section>
+
+        <section class="reWork" id="reWork">
+            <img src="assets/illu_work.svg" alt="" class="illu">
+            <div class="textContainer">
+                <div class="titleContainer">
+                    <img src="assets/seformer.png" alt="">
+                    <h2>Retrouver un avenir professionnel</h2>
+                </div>
+                <p>
+                    Delphine était comptable. Son accident et la perte de son emploi ont interrompu sa vie professionnelle, mais pas ses talents ni son envie d’avancer. Toujours accompagnée régulièrement par son assistante sociale, elle découvre le centre de formation Valentin Haüy (ESRP) et choisit une nouvelle voie : devenir kinésithérapeute pour inventer la suite.
+                    <br>
+                    <br>
+                    <span class="textGras">Delphine n’a pas retrouvé sa vie d’avant. Elle a retrouvé le pouvoir de construire celle d’après.</span>
+                </p>
+            </div>
+        </section>
+
+        <section class="action">
+            <p>Alors, ne nous arrêtons pas là. Continuons d’avancer aux côtés de Delphine et de toutes les personnes aveugles ou malvoyantes pour que chacune puisse continuer à construire sa vie en toute autonomie.</p>
+            <h2>Vous aussi faites un don à l’association Valentin Haüy !</h2>
+            <div class="actionContainer">
+                <a href="https://donner.avh.asso.fr/ponctuel/?from=W26GDN&utm_source=lp&utm_medium=organic&utm_campaign=vmv26" class="CTA_secondaire CTA_orange">Je fais un don ponctuel</a>
+                <img src="assets/illu_Don.png" alt="">
+                <a href="https://donner.avh.asso.fr/regulier/?from=W26GDN&utm_medium=lp&utm_source=organic&utm_campaign=vmv26" class="CTA_secondaire CTA_violet">Je fais un don mensuel</a>
+            </div> 
+        </section>
+    </main>
+
+    <footer data-include="footer/footer.html"></footer>
+
+    <script>
+        document.querySelectorAll('[data-include]').forEach(async element => {
+            try {
+                const response = await fetch(element.dataset.include);
+
+                if (!response.ok) {
+                    throw new Error(`Impossible de charger ${element.dataset.include}`);
+                }
+
+                element.innerHTML = await response.text();
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    </script>
+
+</body>
+</html>
