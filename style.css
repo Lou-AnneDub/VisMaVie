@@ -459,7 +459,7 @@ h2 {
     content: "";
     position: absolute;
 
-    background-image: url("./assets/fils/fil1.svg");
+    background-image: url("/VisMaVie/assets/fils/fil1.svg");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
